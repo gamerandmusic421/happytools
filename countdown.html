@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timer</title>
+    <style>
+      
+        /* Navbar styles */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #0077cc;
+          color: white;
+          padding: 1rem;
+        }
+  
+        .navbar-brand {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+  
+        .navbar-links {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .navbar-links li {
+          margin-left: 1rem;
+        }
+  
+        .navbar-links a {
+          color: white;
+          text-decoration: none;
+          font-size: 1.2rem;
+        }
+  
+        .navbar-links a:hover {
+          text-decoration: underline;
+        }
+        .timer-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+  
+        .timer {
+          font-size: 4rem;
+          font-weight: bold;
+          margin-top: 1rem;
+          background: rgb(34,118,195);
+          background: linear-gradient(0deg, rgba(34,118,195,1) 0%, rgba(253,121,45,1) 100%);        
+        }
+        button{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        button:hover {
+          background-color: #0062a3;
+        }
+        .button-green{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #00cc47;
+          cursor: pointer;
+        }
+  
+        .button-green:hover {
+          background-color: #11e75c;
+        }
+        input[type="number"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: 10rem;
+        }
+        input[type="text"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: fit-content;
+        }
+        textarea {
+          font-size: 1.5rem;
+          border-radius: 8px;
+          width: fit-content;
+        }
+  
+        input[type="submit"] {
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        input[type="submit"]:hover {
+          background-color: #0062a3;
+        }
+        fieldset{
+            border-radius: 10px;
+        }
+      </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">HappyTools</div>
+      <ul class="navbar-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gradientgenerator.html">Gradient Generator</a></li>
+        <li><a href="countdown.html"><strong>Countdown Timer</strong></a></li>
+        <li><a href="base64.html">Base64</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+    <div class="timer-container">
+      <h2>Countdown Timer</h2>
+      <fieldset class="timer">
+        <center>
+        <span class="minutes" style="color:white">25</span>:<span class="seconds" style="color:white">00</span>
+    </center>  
+    </fieldset>
+      <form>
+        <label for="minutes-input">Minutes:</label>
+        <input type="number" id="minutes-input" name="minutes-input" min="0" max="60" step="1" value="25">
+        <input type="submit" value="Set Timer">
+      </form>
+      <button class="start-button">Start</button>
+      <button class="reset-button">Reset</button>
+    </div>
+
+    <script>
+      let time = 1500; // 25 minutes * 60 seconds
+
+      const minutesSpan = document.querySelector(".minutes");
+      const secondsSpan = document.querySelector(".seconds");
+      const startButton = document.querySelector(".start-button");
+      const resetButton = document.querySelector(".reset-button");
+      const minutesInput = document.querySelector("#minutes-input");
+      const form = document.querySelector("form");
+
+      let intervalId;
+
+      function updateTime() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        if (minutes == "00"){
+          return true
+        } 
+        minutesSpan.textContent = minutes < 10 ? "0" + minutes : minutes;
+        secondsSpan.textContent = seconds < 10 ? "0" + seconds : seconds;
+      }
+
+      function startTimer() {
+        startButton.textContent = "Pause";
+        intervalId = setInterval(() => {
+          time--;
+          const h = updateTime();
+          if (h){Break}
+          if (time === 0) {
+            clearInterval(intervalId);
+            startButton.textContent = "Start";
+          }
+        }, 1000);
+      }
+
+      function pauseTimer() {
+        startButton.textContent = "Start";
+        clearInterval(intervalId);
+      }
+
+      function resetTimer() {
+        pauseTimer();
+        time = 1500;
+        updateTime();
+      }
+
+      function setTimer(event) {
+        event.preventDefault();
+        pauseTimer();
+        time = parseInt(minutesInput.value) * 60;
+        updateTime();
+      }
+      startButton.addEventListener("click", () => {
+          if (startButton.textContent === "Start") {
+              startTimer();
+          } else {
+            pauseTimer();
+          }
+      });
+
+  resetButton.addEventListener("click", resetTimer);
+
+  form.addEventListener("submit", setTimer);
+</script>
+</body>
+</html>

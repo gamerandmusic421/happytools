@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gradient Generator | Logo generator</title>
+</head>
+<body>
+    <style>
+        body{
+            background: #333;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        /* Navbar styles */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #0077cc;
+          color: white;
+          padding: 1rem;
+          width: 1650px;
+          height: 20;
+        }
+  
+        .navbar-brand {
+          font-size: 1.5rem;
+          font-weight: bold;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+  
+        .navbar-links {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .navbar-links li {
+          margin-left: 1rem;
+        }
+  
+        .navbar-links a {
+          color: white;
+          text-decoration: none;
+          font-size: 1.2rem;
+        }
+  
+        .navbar-links a:hover {
+          text-decoration: underline;
+        }
+        .timer-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+  
+        .timer {
+          font-size: 4rem;
+          font-weight: bold;
+          margin-top: 1rem;
+        }
+  
+        button{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        button:hover {
+          background-color: #0062a3;
+        }
+        .button-green{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #00cc47;
+          cursor: pointer;
+        }
+  
+        .button-green:hover {
+          background-color: #11e75c;
+        }
+        input[type="number"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: 10rem;
+        }
+        input[type="text"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: fit-content;
+        }
+        textarea {
+          font-size: 1.5rem;
+          border-radius: 8px;
+          width: fit-content;
+        }
+  
+        input[type="submit"] {
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        input[type="submit"]:hover {
+          background-color: #0062a3;
+        }
+        fieldset{
+            border-radius: 10px;
+        }
+        hr {
+          height: 2px;
+          background: linear-gradient(to right, #0077cc, #00bfff, #00ff7f, #ffff00, #ff00ff, #8b00ff);
+        }
+        select {
+    background: radial-gradient(circle, #4f4f4f 0%, #333333 100%);
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  select:focus {
+    outline: none;
+    color:gray;
+    box-shadow: 0 0 5px #0077cc;
+  }
+  canvas {
+			display: block;
+			margin: 0 auto;
+		}
+      </style>
+    <nav class="navbar">
+        <div class="navbar-brand">HappyTools</div>
+        <ul class="navbar-links">
+        <li><a href="index.html">Home</a></li>
+
+          <li><a href="gradientgenerator.html"><strong>Gradient Generator</strong></a></li>
+          <li><a href="countdown.html">Countdown Timer</a></li>
+          <li><a href="base64.html">Base64</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </nav>
+      <div class="timer-container" style="margin:50px;">
+      <center>
+	<canvas id="canvas"></canvas>
+	<button id="download-btn">Download as PNG</button>
+    <button id=""  onclick="generateRandomGradient()">Generate another one</button>
+    
+</center>
+</div>
+	<script>
+    const canvas = document.getElementById('canvas');
+const downloadBtn = document.getElementById('download-btn');
+const ctx = canvas.getContext('2d');
+const width = 500; // replace with width of logo
+const height = 500; // replace with height of logo
+canvas.width = width;
+canvas.height = height;
+
+function generateRandomGradient() {
+	const gradient = ctx.createLinearGradient(0, 0, width, height);
+	gradient.addColorStop(0, getRandomColor());
+	gradient.addColorStop(1, getRandomColor());
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, width, height);
+}
+
+function getRandomColor() {
+	const r = Math.floor(Math.random() * 256);
+	const g = Math.floor(Math.random() * 256);
+	const b = Math.floor(Math.random() * 256);
+	return `rgb(${r}, ${g}, ${b})`;
+}
+
+generateRandomGradient();
+
+downloadBtn.addEventListener('click', () => {
+    const filename = prompt("File name : ")
+	const link = document.createElement('a');
+	if (filename){
+        link.download = `${filename}.png`;
+    }
+    else{link.download = "gradient.png"}
+	link.href = canvas.toDataURL();
+	link.click();
+});
+</script>
+</body>
+
+</html>

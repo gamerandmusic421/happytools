@@ -1,0 +1,158 @@
+<!-- Base64 Decoder and Encoder -->
+<html>
+  <head>
+    <title>Base64 Encoder/Decoder</title>
+    <!-- Navbar styles -->
+    <style>
+      
+        /* Navbar styles */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #0077cc;
+          color: white;
+          padding: 1rem;
+        }
+  
+        .navbar-brand {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+  
+        .navbar-links {
+          display: flex;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+  
+        .navbar-links li {
+          margin-left: 1rem;
+        }
+  
+        .navbar-links a {
+          color: white;
+          text-decoration: none;
+          font-size: 1.2rem;
+        }
+  
+        .navbar-links a:hover {
+          text-decoration: underline;
+        }
+        .timer-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+  
+        .timer {
+          font-size: 4rem;
+          font-weight: bold;
+          margin-top: 1rem;
+        }
+  
+        button{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        button:hover {
+          background-color: #0062a3;
+        }
+        .button-green{
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #00cc47;
+          cursor: pointer;
+        }
+  
+        .button-green:hover {
+          background-color: #11e75c;
+        }
+        input[type="number"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: 10rem;
+        }
+        input[type="text"] {
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          margin-top: 1rem;
+          width: fit-content;
+        }
+        textarea {
+          font-size: 1.5rem;
+          border-radius: 8px;
+          width: fit-content;
+        }
+  
+        input[type="submit"] {
+          margin-top: 1rem;
+          font-size: 1.5rem;
+          padding: 0.5rem 1rem;
+          border-radius: 5px;
+          border: none;
+          color: white;
+          background-color: #0077cc;
+          cursor: pointer;
+        }
+  
+        input[type="submit"]:hover {
+          background-color: #0062a3;
+        }
+        fieldset{
+            border-radius: 10px;
+        }
+      </style>
+    <script>
+      function b64decode(str) {
+        return window.atob(str);
+      }
+
+      function b64encode(str) {
+        return window.btoa(str);
+      }
+    </script>
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="navbar-brand">HappyTools</div>
+      <ul class="navbar-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="gradientgenerator.html">Gradient Generator</a></li>
+        <li><a href="countdown.html">Countdown Timer</a></li>
+        <li><a href="base64.html"><strong>Base64</strong></a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </div>
+
+    <div class="timer-container" style="margin:20px">
+        <fieldset>
+    <h2>Base64 Encoder</h2>
+        <input type="text" id="input" placeholder="Input text here..." />
+        <br>
+        <button type="submit" value="Encode" onclick="document.getElementById('output').value=b64encode(document.getElementById('input').value); return false;">Enocde</button>
+        <button type="submit" value="Decode" onclick="document.getElementById('output').value=b64decode(document.getElementById('input').value); return false;">Decode</button>
+     <br><br>
+        <textarea type="text"id="output" placeholder="" style="width: 314px; height: 68px;" >Output here... </textarea>
+    </fieldset>
+    </div>
+  </body>
+</html>
